@@ -61,7 +61,8 @@ pub fn claimable(
   } else {
     stream.total * (now - stream.start) / stream.duration
   }
-  proof_assert vested == vested_at(stream.total, stream.start, stream.duration, now)
+  proof_assert vested ==
+    vested_at(stream.total, stream.start, stream.duration, now)
   let result = if vested <= stream.released {
     0
   } else {
@@ -86,7 +87,8 @@ pub fn release(
   } else {
     stream.total * (now - stream.start) / stream.duration
   }
-  proof_assert vested == vested_at(stream.total, stream.start, stream.duration, now)
+  proof_assert vested ==
+    vested_at(stream.total, stream.start, stream.duration, now)
   let released = if vested <= stream.released {
     stream.released
   } else {

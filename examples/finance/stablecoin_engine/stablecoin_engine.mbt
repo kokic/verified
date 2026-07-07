@@ -337,7 +337,8 @@ pub fn is_liquidatable(
   proof_require: engine_inv(engine),
   proof_ensure: result => liquidatable_post(engine, result),
 } {
-  let result = engine.collateral * 10000 - engine.debt * engine.min_ratio_bps < 0
+  let result = engine.collateral * 10000 - engine.debt * engine.min_ratio_bps <
+    0
   proof_assert result == (headroom(engine) < 0)
   proof_assert liquidatable_post(engine, result)
   result
