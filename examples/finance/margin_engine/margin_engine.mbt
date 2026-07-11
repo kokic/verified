@@ -68,11 +68,12 @@ pub fn margin_buffer(
   proof_ensure: result => margin_buffer_post(account, mark, result),
 } {
   let result = (
-    account.collateral -
-    account.funding_debt +
-    account.contracts * (mark - account.entry_price)
-  ) * 10000 -
-  account.contracts * mark * account.maintenance_margin_bps
+      account.collateral -
+      account.funding_debt +
+      account.contracts * (mark - account.entry_price)
+    ) *
+    10000 -
+    account.contracts * mark * account.maintenance_margin_bps
   proof_assert result == scaled_buffer(account, mark)
   proof_assert margin_buffer_post(account, mark, result)
   result
@@ -165,11 +166,12 @@ pub fn min_close_to_restore(
   proof_ensure: result => min_close_to_restore_post(account, mark, result),
 } {
   let buffer = (
-    account.collateral -
-    account.funding_debt +
-    account.contracts * (mark - account.entry_price)
-  ) * 10000 -
-  account.contracts * mark * account.maintenance_margin_bps
+      account.collateral -
+      account.funding_debt +
+      account.contracts * (mark - account.entry_price)
+    ) *
+    10000 -
+    account.contracts * mark * account.maintenance_margin_bps
   proof_assert buffer == scaled_buffer(account, mark)
   proof_assert 0 < account.maintenance_margin_bps
   proof_assert 0 < mark * account.maintenance_margin_bps
@@ -240,11 +242,13 @@ pub fn is_liquidatable(
   proof_ensure: result => liquidatable_post(account, mark, result),
 } {
   let result = (
-    account.collateral -
-    account.funding_debt +
-    account.contracts * (mark - account.entry_price)
-  ) * 10000 -
-  account.contracts * mark * account.maintenance_margin_bps < 0
+      account.collateral -
+      account.funding_debt +
+      account.contracts * (mark - account.entry_price)
+    ) *
+    10000 -
+    account.contracts * mark * account.maintenance_margin_bps <
+    0
   proof_assert result == (scaled_buffer(account, mark) < 0)
   proof_assert liquidatable_post(account, mark, result)
   result
